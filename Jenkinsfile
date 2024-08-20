@@ -40,7 +40,7 @@ pipeline {
         stage('deploy backend') {
             steps {
                 withAWS(region: 'us-east-1', credentials: 'AWS_CREDENTIALS') {
-                    sh "aws s3 sync demo/target/*.jar s3://crag-supply-co-backend"
+                    sh "aws s3 sync backend/target/*.jar s3://crag-supply-co-backend"
                     sh '''
                     aws elasticbeanstalk create-application-version \
                     --application-name crag-supply-co \
