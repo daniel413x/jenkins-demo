@@ -8,11 +8,11 @@ pipeline {
                 sh "cd frontend && npm install && npm run build"
             }    
         }
-        
+
         stage('deploy frontend') {
             steps {
                 withAWS(region: 'us-east-1', credentials: 'AWS_CREDENTIALS') {
-                    sh "aws sync frontend/dist s3://crag-supply-co-client"
+                    sh "aws s3 sync frontend/dist s3://crag-supply-co-client"
                 }
             }    
         }
