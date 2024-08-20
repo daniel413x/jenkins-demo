@@ -11,15 +11,13 @@ pipeline {
 
         stage('deploy frontend') {
             steps {
-                script {
-                    try {
-                        withAWS(region: 'us-east-1', credentials: 'AWS_CREDENTIALS') {
-                            sh "aws s3 sync frontend/dist s3://crag-supply-co-client"
-                        }
-                    } catch (Exception e) {
-                            echo "${e}"
-                            throw e
+                try {
+                    withAWS(region: 'us-east-1', credentials: 'AWS_CREDENTIALS') {
+                        sh "aws s3 sync frontend/dist s3://crag-supply-co-client"
                     }
+                } catch (Exception e) {
+                        echo "${e}"
+                        throw e
                 }
             }
         }
