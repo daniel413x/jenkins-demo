@@ -11,13 +11,8 @@ pipeline {
 
         stage('deploy frontend') {
             steps {
-                try {
-                    withAWS(region: 'us-east-1', credentials: 'AWS_CREDENTIALS') {
-                        sh "aws s3 sync frontend/dist s3://crag-supply-co-client"
-                    }
-                } catch (Exception e) {
-                        echo "${e}"
-                        throw e
+                withAWS(region: 'us-east-1', credentials: 'AWS_CREDENTIALS') {
+                    sh "aws s3 sync frontend/dist s3://crag-supply-co-client"
                 }
             }
         }
@@ -38,20 +33,15 @@ pipeline {
 
         stage('deploy backend') {
             steps {
-                try {
-                    withAWS(region: 'us-east-1', credentials: 'AWS_CREDENTIALS') {
-                        sh "aws s3 sync demo/target/*.jar s3://crag-supply-co-backend"
-                        sh '''
-                        aws elasticbeanstalk create-application-version \
-                        --application-name crag-supply-co \
-                        --version-label 0.0.1 \
-                        --source-bundle S3Bucket=crag-supply-co-backend,S3Key=*.jar
-                        '''
-                        sh "aws elasticbeanstalk update-environment --environment-name Crag-supply-co-env-4 --version-label 0.0.1"
-                    }
-                } catch (Exception e) {
-                    echo "${e}"
-                    throw e
+                withAWS(region: 'us-east-1', credentials: 'AWS_CREDENTIALS') {
+                    sh "aws s3 sync demo/target/*.jar s3://crag-supply-co-backend"
+                    sh '''
+                    aws elasticbeanstalk create-application-version \
+                    --application-name crag-supply-co \
+                    --version-label 0.0.1 \
+                    --source-bundle S3Bucket=crag-supply-co-backend,S3Key=*.jar
+                    '''
+                    sh "aws elasticbeanstalk update-environment --environment-name Crag-supply-co-env-4 --version-label 0.0.1"
                 }
             }
         }
