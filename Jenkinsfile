@@ -47,8 +47,8 @@ pipeline {
                         --application-name crag-supply-co \
                         --version-label 0.0.1 \
                         --source-bundle S3Bucket=crag-supply-co-backend,S3Key=$JAR_FILENAME
+                    aws elasticbeanstalk update-environment --environment-name Crag-supply-co-env-4 --version-label 0.0.1
                     '''
-                    sh "aws elasticbeanstalk update-environment --environment-name Crag-supply-co-env-4 --version-label 0.0.1"
                 }
             }
         }
