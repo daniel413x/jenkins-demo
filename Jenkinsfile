@@ -1,5 +1,11 @@
 pipeline {
     agent any
+    
+    environment {
+        DB_URL = 'jdbc:your_database_url'
+        DB_USER = 'your_database_username'
+        DB_PWD = 'your_database_password'
+    }
 
     stages {
         stage('build frontend') {
