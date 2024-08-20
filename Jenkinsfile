@@ -27,6 +27,7 @@ pipeline {
             steps {
                 withAWS(region: 'us-east-1', credentials: 'AWS_CREDENTIALS') {
                     sh "cd backend && mvn clean install -DskipTests=true -Dspring.profiles.active=build"
+                    sh 'ls -l backend/target'
                 }
             }
         }
