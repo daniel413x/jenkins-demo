@@ -17,3 +17,15 @@ spring:
       enabled: ALWAYS
 server:
   port: 5000
+
+---
+spring:
+  profiles: build
+  datasource:
+    url: none
+  jpa:
+    hibernate:
+      ddl-auto: none
+  autoconfigure:
+    exclude: 
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration

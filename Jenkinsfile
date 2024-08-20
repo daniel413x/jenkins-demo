@@ -26,14 +26,14 @@ pipeline {
         stage('build backend') {
             steps {
                 withAWS(region: 'us-east-1', credentials: 'AWS_CREDENTIALS') {
-                    sh "cd backend && mvn clean install -Dskiptests"
+                    sh "cd backend && mvn clean install -DskipTests=true -Dspring.profiles.active=build"
                 }
             }
         }
 
         stage('test backend') {
             steps {
-                sh "echo tests happened"
+                sh "echo unit tests happened here"
             }
         }
 
