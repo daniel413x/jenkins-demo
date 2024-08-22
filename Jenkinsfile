@@ -8,7 +8,7 @@ pipeline {
         DB_URL = 'jdbc:your_database_url'
         DB_USER = 'your_database_username'
         DB_PWD = 'your_database_password'
-        VERSION = "0.0.29"
+        VERSION = "0.0.30"
     }
 
     stages {
@@ -59,6 +59,5 @@ pipeline {
                 }
             }
         }
-
     }
 }
