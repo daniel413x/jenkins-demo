@@ -25,8 +25,8 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/product")
-@CrossOrigin(origins = "http://crag-supply-co-client.s3-website-us-east-1.amazonaws.com")
-// @CrossOrigin
+// @CrossOrigin(origins = "http://crag-supply-co-client.s3-website-us-east-1.amazonaws.com")
+@CrossOrigin
 public class ProductController {
     private ProductService service;
 

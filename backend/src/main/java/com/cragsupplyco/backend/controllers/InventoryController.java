@@ -24,8 +24,8 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/inventory")
-@CrossOrigin(origins = "http://crag-supply-co-client.s3-website-us-east-1.amazonaws.com")
-// @CrossOrigin
+// @CrossOrigin(origins = "http://crag-supply-co-client.s3-website-us-east-1.amazonaws.com")
+@CrossOrigin
 public class InventoryController {
     private InventoryService service;
 
