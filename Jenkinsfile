@@ -1,13 +1,14 @@
 pipeline {
     agent any
     tools {
-        maven 'Maven' // Match this name with your Global Tool Configuration
+        maven 'Maven'
     }
     
     environment {
         DB_URL = 'jdbc:your_database_url'
         DB_USER = 'your_database_username'
         DB_PWD = 'your_database_password'
+        VERSION = "0.0.19"
     }
 
     stages {
@@ -49,11 +50,11 @@ pipeline {
                     echo Deploying %JAR_FILE%
                     aws elasticbeanstalk create-application-version ^
                         --application-name crag-supply-co ^
-                        --version-label 0.0.18 ^
+                        --version-label ${VERSION} ^
                         --source-bundle S3Bucket=crag-supply-co-backend,S3Key=%JAR_FILE%
                     aws elasticbeanstalk update-environment ^
                         --environment-name Crag-supply-co-env-4 ^
-                        --version-label 0.0.18
+                        --version-label ${VERSION}
                     '''
                 }
             }
