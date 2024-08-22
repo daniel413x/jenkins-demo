@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools {
+        maven 'Maven' // Match this name with your Global Tool Configuration
+    }
     
     environment {
         DB_URL = 'jdbc:your_database_url'
@@ -25,7 +28,9 @@ pipeline {
 
         stage('build backend') {
             steps {
-                bat "cd backend && mvn clean install -DskipTests=true -Dspring.profiles.active=build"
+                withMaven(maven: 'Maven') {
+                    bat "cd backend && mvn clean install -DskipTests=true -Dspring.profiles.active=build"
+                }
             }
         }
 
