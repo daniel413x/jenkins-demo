@@ -20,7 +20,9 @@ server:
 
 ---
 spring:
-  profiles: build
+  config:
+    activate:
+      on-profile: build
   datasource:
     url: none
   jpa:
