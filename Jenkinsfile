@@ -45,37 +45,13 @@ pipeline {
                     echo "Deploying $JAR_FILENAME"
                     aws elasticbeanstalk create-application-version \
                         --application-name crag-supply-co \
-                        --version-label 0.0.15 \
+                        --version-label 0.0.17 \
                         --source-bundle S3Bucket=crag-supply-co-backend,S3Key=$JAR_FILENAME
-                    aws elasticbeanstalk update-environment --environment-name Crag-supply-co-env-4 --version-label 0.0.15
+                    aws elasticbeanstalk update-environment --environment-name Crag-supply-co-env-4 --version-label 0.0.17
                     '''
                 }
             }
         }
 
-        // stage('stage name') {
-        //     steps {
-        //         sh "echo Building Stage 1"
-        //     }
-            
-        // }
-
-        // stage('Test') {
-        //     steps {
-        //         sh "echo Testing Stage 2"
-        //     }
-        // }
-
-        // stage('testGitWebhook') {
-        //     steps {
-        //         sh "echo testGitWebhook works"
-        //     }
-        // }
-
-        // stage('Deploy') {
-        //     steps {
-        //         sh "echo Deploy"
-        //     }
-        // }
     }
 }
