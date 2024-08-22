@@ -44,15 +44,16 @@ pipeline {
             steps {
                 withAWS(region: 'us-east-1', credentials: 'AWS_CREDENTIALS') {
                     bat '''
-                    JAR_FILE=$(ls backend/target/*.jar | head -n 1)
-                    aws s3 cp $JAR_FILE s3://crag-supply-co-backend/
-                    JAR_FILENAME=$(basename $JAR_FILE)
-                    echo "Deploying $JAR_FILENAME"
-                    aws elasticbeanstalk create-application-version \
-                        --application-name crag-supply-co \
-                        --version-label 0.0.18 \
-                        --source-bundle S3Bucket=crag-supply-co-backend,S3Key=$JAR_FILENAME
-                    aws elasticbeanstalk update-environment --environment-name Crag-supply-co-env-4 --version-label 0.0.18
+                    for /f "delims=" %%i in ('dir /b backend\\target\\*.jar') do set JAR_FILE=%%i
+                    aws s3 cp backend\\target\\%JAR_FILE% s3://crag-supply-co-backend/
+                    echo Deploying %JAR_FILE%
+                    aws elasticbeanstalk create-application-version ^
+                        --application-name crag-supply-co ^
+                        --version-label 0.0.18 ^
+                        --source-bundle S3Bucket=crag-supply-co-backend,S3Key=%JAR_FILE%
+                    aws elasticbeanstalk update-environment ^
+                        --environment-name Crag-supply-co-env-4 ^
+                        --version-label 0.0.18
                     '''
                 }
             }
