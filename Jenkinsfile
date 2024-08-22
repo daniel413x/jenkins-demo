@@ -50,11 +50,11 @@ pipeline {
                     echo Deploying %JAR_FILE%
                     aws elasticbeanstalk create-application-version ^
                         --application-name crag-supply-co ^
-                        --version-label ${VERSION} ^
+                        --version-label %VERSION% ^
                         --source-bundle S3Bucket=crag-supply-co-backend,S3Key=%JAR_FILE%
                     aws elasticbeanstalk update-environment ^
                         --environment-name Crag-supply-co-env-4 ^
-                        --version-label ${VERSION}
+                        --version-label %VERSION%
                     '''
                 }
             }
