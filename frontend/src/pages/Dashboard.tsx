@@ -40,9 +40,9 @@ export const Dashboard = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <ErrorPage messageText={error.message} />;
 
-  return (
+  return 
     <section id="dashboard">
-      <h1>Dashboard</h1>
+      <h1>SkillStorm was here</h1>
       <Card
         style={{ marginTop: 16 }}
         type="inner"
@@ -60,5 +60,5 @@ export const Dashboard = () => {
         <h1 style={{ padding: 20 }}>{totalCapacity}</h1>
       </Card>
     </section>
-  );
+  ;
 };
